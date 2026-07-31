@@ -14,7 +14,7 @@ import {
   MONTANA_REGIONS,
   REGISTERED_VOTER_OPTIONS,
 } from '@/constants/montana'
-import { formatPhoneInput } from '@/lib/phone'
+import { formatPhoneInput, validateOptionalPhone } from '@/lib/phone'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -56,6 +56,8 @@ const validate = (values) => {
   }
   if (!values.availability) errors.availability = 'Please choose an availability.'
   if (!values.issues.trim()) errors.issues = 'Please tell us what matters most.'
+  const phoneError = validateOptionalPhone(values.phone)
+  if (phoneError) errors.phone = phoneError
   return errors
 }
 

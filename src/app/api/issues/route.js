@@ -1,4 +1,8 @@
-import { normalizePhoneForSubmit } from '@/lib/phone'
+import {
+  PHONE_INCOMPLETE_MESSAGE,
+  isPhoneComplete,
+  normalizePhoneForSubmit,
+} from '@/lib/phone'
 
 const WEBHOOK_URLS = [
   process.env.GHL_ISSUES_WEBHOOK ||
@@ -21,9 +25,14 @@ export async function POST(request) {
     const email = (body.email || '').toString().trim()
     const subject = (body.subject || '').toString().trim()
     const description = (body.description || '').toString().trim()
+    const phone = (body.phone || '').toString().trim()
 
     if (!name || !email || !subject || !description) {
       return Response.json({ error: 'Missing required fields' }, { status: 400 })
+    }
+
+    if (phone && !isPhoneComplete(phone)) {
+      return Response.json({ error: PHONE_INCOMPLETE_MESSAGE }, { status: 400 })
     }
 
     const { firstName, lastName } = splitName(name)
@@ -33,7 +42,7 @@ export async function POST(request) {
       firstName,
       lastName,
       email,
-      phone: normalizePhoneForSubmit(body.phone),
+      phone: normalizePhoneForSubmit(phone),
       issue_category: (body.category || '').toString(),
       issue_location: (body.location || '').toString().trim(),
       issue_subject: subject,

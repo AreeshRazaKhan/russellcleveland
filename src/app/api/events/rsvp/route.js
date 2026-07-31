@@ -1,4 +1,8 @@
-import { normalizePhoneForSubmit } from '@/lib/phone'
+import {
+  PHONE_INCOMPLETE_MESSAGE,
+  isPhoneComplete,
+  normalizePhoneForSubmit,
+} from '@/lib/phone'
 
 const WEBHOOK_URLS = [
   process.env.GHL_EVENT_RSVP_WEBHOOK ||
@@ -17,9 +21,14 @@ export async function POST(request) {
     const eventDate = (body.eventDate || '').toString().trim()
     const eventTime = (body.eventTime || '').toString().trim()
     const eventCategory = (body.eventCategory || '').toString().trim()
+    const phone = (body.phone || '').toString().trim()
 
     if (!firstName || !email) {
       return Response.json({ error: 'Missing required fields' }, { status: 400 })
+    }
+
+    if (phone && !isPhoneComplete(phone)) {
+      return Response.json({ error: PHONE_INCOMPLETE_MESSAGE }, { status: 400 })
     }
 
     const payload = {
@@ -27,7 +36,7 @@ export async function POST(request) {
       firstName,
       lastName,
       email,
-      phone: normalizePhoneForSubmit(body.phone),
+      phone: normalizePhoneForSubmit(phone),
       eventName,
       eventDate,
       eventTime,

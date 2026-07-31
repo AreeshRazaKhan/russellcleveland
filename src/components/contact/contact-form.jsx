@@ -6,7 +6,7 @@ import { useState } from 'react'
 import FormField from '@/components/ui/form-field'
 import FormLegalLine from '@/components/ui/form-legal-line'
 import MagneticButton from '@/components/ui/magnetic-button'
-import { formatPhoneInput } from '@/lib/phone'
+import { formatPhoneInput, validateOptionalPhone } from '@/lib/phone'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -30,6 +30,8 @@ const validate = (values) => {
     errors.email = 'Please enter a valid email address.'
   }
   if (!values.message.trim()) errors.message = 'Message is required.'
+  const phoneError = validateOptionalPhone(values.phone)
+  if (phoneError) errors.phone = phoneError
   return errors
 }
 

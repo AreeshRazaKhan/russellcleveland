@@ -7,7 +7,7 @@ import FormField from '@/components/ui/form-field'
 import FormLegalLine from '@/components/ui/form-legal-line'
 import MagneticButton from '@/components/ui/magnetic-button'
 import { ISSUE_CATEGORIES } from '@/constants/issues'
-import { formatPhoneInput } from '@/lib/phone'
+import { formatPhoneInput, validateOptionalPhone } from '@/lib/phone'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -35,6 +35,8 @@ const validate = (values) => {
   if (!values.description.trim()) {
     errors.description = 'Please tell us what’s on your mind.'
   }
+  const phoneError = validateOptionalPhone(values.phone)
+  if (phoneError) errors.phone = phoneError
   return errors
 }
 

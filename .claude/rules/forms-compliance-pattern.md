@@ -101,9 +101,17 @@ Every form in scope exposes an **optional** phone field.
    phone input, and API routes must not reject submissions that omit
    it.
 
+5. **Optional does not mean partial.** A blank phone is always
+   accepted; a *started but incomplete* phone is never accepted.
+   Fewer than 10 digits blocks submission on the client with an inline
+   field error, and the API route returns `400` with
+   `PHONE_INCOMPLETE_MESSAGE`. Never let a partial number silently
+   normalize to empty and ship — the user must either finish the
+   number or clear the field.
+
 ### Implementation
 
-Two helpers live in `src/lib/phone.js`:
+Four helpers live in `src/lib/phone.js`:
 
 ```js
 // Live client-side formatter — bind to the phone input's onChange
@@ -120,28 +128,53 @@ normalizePhoneForSubmit('5555550100')        → '+1 (555) 555-0100'
 normalizePhoneForSubmit('+1 (555) 555-0100') → '+1 (555) 555-0100'
 normalizePhoneForSubmit('555555')            → ''   // partial → empty
 normalizePhoneForSubmit('')                  → ''
+
+// Completeness guards — block partial numbers before they ship
+isPhoneComplete('+1 (555) 555-0100')  → true
+isPhoneComplete('555555')             → false
+isPhoneComplete('')                   → false
+
+// Client-side validator for an optional field: '' means valid
+validateOptionalPhone('')                   → ''    // blank is allowed
+validateOptionalPhone('+1 (555) 555-0100')  → ''
+validateOptionalPhone('555555')             → PHONE_INCOMPLETE_MESSAGE
 ```
 
 **Wiring in the form:**
 
 ```jsx
-import { formatPhoneInput } from '@/lib/phone'
+import { formatPhoneInput, validateOptionalPhone } from '@/lib/phone'
 
-<input
+// inside validate(values)
+const phoneError = validateOptionalPhone(values.phone)
+if (phoneError) errors.phone = phoneError
+
+<FormField
+  name="phone"
   type="tel"
-  value={formData.phone}
-  onChange={(e) => {
-    setFormData((prev) => ({ ...prev, phone: formatPhoneInput(e.target.value) }))
-    setError('')
-  }}
-  placeholder="+1 (503) 555-0123"
+  label="Phone (optional)"
+  value={values.phone}
+  onChange={handlePhoneChange}   // runs formatPhoneInput
+  error={errors.phone}
+  placeholder="+1 (541) 555-0123"
 />
 ```
 
 **Wiring in the API route:**
 
 ```js
-import { normalizePhoneForSubmit } from '@/lib/phone'
+import {
+  PHONE_INCOMPLETE_MESSAGE,
+  isPhoneComplete,
+  normalizePhoneForSubmit,
+} from '@/lib/phone'
+
+const phone = (body.phone || '').toString().trim()
+
+// after the required-field check
+if (phone && !isPhoneComplete(phone)) {
+  return Response.json({ error: PHONE_INCOMPLETE_MESSAGE }, { status: 400 })
+}
 
 const payload = {
   // ...
@@ -159,8 +192,11 @@ const payload = {
   (`phone: phone?.trim() || ''`). Always route through
   `normalizePhoneForSubmit`.
 - The placeholder must show the full format: `+1 (xxx) xxx-xxxx`.
-- Partial entries (fewer than 10 digits after the country code)
-  normalize to empty string on the server side.
+- Partial entries (fewer than 10 digits after the country code) are
+  rejected, not silently dropped: `validateOptionalPhone` blocks the
+  client submit and the API route returns `400`. The
+  `normalizePhoneForSubmit` → `''` behavior remains the defensive
+  backstop for anything that slips past both checks.
 
 ---
 
@@ -266,6 +302,9 @@ to an existing form — verify all of the following:
 
 1. [ ] Phone input uses `formatPhoneInput` in its `onChange` and has
        the `+1 (xxx) xxx-xxxx` placeholder.
+1b. [ ] The form's `validate()` runs `validateOptionalPhone(values.phone)`
+       and surfaces the message on the phone field, and the API route
+       returns `400` for a non-empty but incomplete phone.
 2. [ ] Form state includes a `phone` string and one boolean per consent
        checkbox.
 3. [ ] `hasPhone` derived from `formData.phone.trim().length > 0`.
