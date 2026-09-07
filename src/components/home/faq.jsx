@@ -5,7 +5,7 @@ import { useState } from 'react'
 const FAQ_ITEMS = [
   {
     q: 'What is Coos County Republicans?',
-    a: 'We are the grassroots Republican community in Coos County, Oregon, organized to recruit and support conservative candidates at every level of government. We operate alongside the Coos County Republican Central Committee (Oregon PAC #300) and the broader Republican Party of Oregon. We are an all-volunteer body of precinct activists, officers, and engaged neighbors who run candidate trainings, voter registration drives, weekly community events at our North Bend headquarters, and the local ground game that wins elections. We focus on city, county, and state races first, because that is where Coos County families feel the most direct impact of policy. We also support federal Republican candidates and issue campaigns in Coos County.',
+    a: 'We are the grassroots Republican community in Coos County, Oregon, organized to recruit and support conservative candidates at every level of government. We operate alongside the Coos County Republican Central Committee (Oregon PAC #300) and the broader Republican Party of Oregon. We are an all-volunteer body of precinct activists, officers, and engaged neighbors who run candidate trainings, voter registration drives, weekly community events at our Coos Bay headquarters, and the local ground game that wins elections. We focus on city, county, and state races first, because that is where Coos County families feel the most direct impact of policy. We also support federal Republican candidates and issue campaigns in Coos County.',
   },
   {
     q: 'Are you a candidate, a party, or a PAC?',
@@ -17,7 +17,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Where is your headquarters and when can I drop in?',
-    a: 'Our headquarters is 3229 Broadway Avenue, Suite F, in North Bend, Oregon. The two standing weekly events are open to anyone, no RSVP needed. Coffee & Chat with a Conservative runs every Saturday morning from eight to eleven, with free coffee and great conversations. Wednesday Pizza & Drinks runs from seven to nine in the evening, with snacks and the same easy format. Both events are designed for first-timers. Walk in, introduce yourself, meet local conservatives, ask anything, and learn about candidates and issues currently in front of the county.',
+    a: 'Our headquarters is 93677 Newport Lane in Coos Bay, Oregon. The two standing weekly events are open to anyone, no RSVP needed. Coffee & Chat with a Conservative runs every Saturday morning from eight to eleven, with free coffee and great conversations. Wednesday Pizza & Drinks runs from seven to nine in the evening, with snacks and the same easy format. Both events are designed for first-timers. Walk in, introduce yourself, meet local conservatives, ask anything, and learn about candidates and issues currently in front of the county.',
   },
   {
     q: 'What is your position on PERS reform?',

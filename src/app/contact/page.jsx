@@ -13,7 +13,7 @@ const SOCIAL_LINKS = [
 export const metadata = {
   title: 'Contact · Coos County Republicans',
   description:
-    'Get in touch with Coos County Republicans. Email party@coos.gop, call +1 541-982-6793, or visit HQ at 3229 Broadway Ave, Suite F, North Bend, OR.',
+    'Get in touch with Coos County Republicans. Email party@coos.gop, call +1 541-982-6793, or visit HQ at 93677 Newport Ln, Coos Bay, OR 97420.',
 }
 
 const ContactPage = () => {
@@ -98,9 +98,9 @@ const ContactPage = () => {
                       Visit us
                     </dt>
                     <dd className="mt-2 font-display text-lg font-semibold text-ink-900 leading-snug">
-                      3229 Broadway Ave, Suite F
+                      93677 Newport Ln
                       <br />
-                      North Bend, OR 97459
+                      Coos Bay, OR 97420
                       <br />
                       <span className="font-italic italic font-normal text-stone-600">
                         events by calendar

@@ -59,7 +59,7 @@ const Hero = () => {
             <div className="absolute inset-0 flex items-end p-8 tablet:p-10">
               <div className="flex flex-col">
                 <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-ochre-400">
-                  North Bend, Oregon
+                  Coos Bay, Oregon
                 </span>
                 <span className="mt-3 font-display text-3xl tablet:text-4xl font-black leading-tight text-moonlight tracking-[-0.02em]">
                   Coos Republicans

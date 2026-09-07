@@ -83,7 +83,7 @@ const GetInvolvedPage = () => {
               </h1>
               <p className="mt-10 max-w-[54ch] font-display text-xl md:text-2xl font-normal leading-[1.35] text-moonlight/85">
                 Join Coos County Republicans by donating, volunteering, joining our mailing and
-                events list, or showing up to HQ in North Bend. Coos County won&rsquo;t take
+                events list, or showing up to HQ in Coos Bay. Coos County won&rsquo;t take
                 itself back.
               </p>
             </div>
