@@ -4,7 +4,7 @@ const BIO_FACTS = [
   { label: 'Mission', value: 'Local Republican Organizing' },
   { label: 'Reach', value: 'Local to Federal' },
   { label: 'Focus', value: 'Liberty · Safety · Stewardship' },
-  { label: 'Based', value: 'North Bend, Oregon' },
+  { label: 'Based', value: 'Coos Bay, Oregon' },
 ]
 
 const MeetCommittee = () => {

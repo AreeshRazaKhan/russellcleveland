@@ -83,7 +83,7 @@ const AboutPage = () => {
                 <div className="absolute inset-0 flex items-end p-8">
                   <div>
                     <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-ochre-400">
-                      North Bend
+                      Coos Bay
                     </span>
                     <span className="mt-2 block font-display text-3xl font-black leading-tight text-moonlight tracking-[-0.02em]">
                       Coos Republicans

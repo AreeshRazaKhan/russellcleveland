@@ -34,7 +34,7 @@ const CtaSection = () => {
           </h2>
           <p className="mt-8 max-w-[58ch] font-display text-xl md:text-2xl font-normal leading-[1.35] text-paper/90">
             Join the Coos County Republicans movement by donating, volunteering, joining our
-            mailing and events list, and showing up at HQ in North Bend.
+            mailing and events list, and showing up at HQ in Coos Bay.
           </p>
 
           <div className="mt-14">

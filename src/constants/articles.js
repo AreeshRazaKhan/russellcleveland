@@ -31,7 +31,7 @@ export const ARTICLES = [
         id: 'who-runs-this',
         heading: 'Who runs this committee',
         paragraphs: [
-          'We are an all-volunteer body of neighbors, business owners, veterans, parents, ranchers, fishermen, and tradespeople. No one here makes a living off Republican politics in Coos County. We do this work because it matters, not because it pays. The headquarters at 3229 Broadway in North Bend stays open because volunteers keep it open.',
+          'We are an all-volunteer body of neighbors, business owners, veterans, parents, ranchers, fishermen, and tradespeople. No one here makes a living off Republican politics in Coos County. We do this work because it matters, not because it pays. The headquarters at 93677 Newport Lane in Coos Bay stays open because volunteers keep it open.',
         ],
       },
       {
